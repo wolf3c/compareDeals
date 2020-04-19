@@ -3,6 +3,7 @@ import Home from '../import/UI/home.svelte'
 
 Meteor.startup(function() {
     new Home({
-        target: document.getElementById('root')
+        target: document.getElementById('root'),
+        hydrate: true
     })
 })
