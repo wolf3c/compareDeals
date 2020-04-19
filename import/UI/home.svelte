@@ -1,101 +1,23 @@
 <script>
-    import { FirstColumn, ColumnContent} from '../API/content.js'
+    import { Meteor } from 'meteor/meteor';
+    import { Tracker } from 'meteor/tracker'
+    import withTracker from '/import/components/withTracker.js'
+    import { onMount, onDestroy } from "svelte";
+    import { ColumnContent,  FirstColumn} from '../API/content.js';
+    import { Fields } from '/import/API/Fields.js';
+    import Sheet from './sheet.svelte'
+
+    let col;
+
+    const computation = withTracker(() => { 
+        Meteor.subscribe('fields');
+        col = Fields.findOne();
+    });
 
     let language = 'zh';
-    let col1 = FirstColumn;
     let content = ColumnContent;
 </script>
 
-<table>
-    <colgroup span='1' align="center" valign="middle" class="col-1"></colgroup>
-
-    <caption>
-        {
-            col1[language] ?
-            col1[language] :
-                col1.en ?
-                col1.en :
-                col1.name
-        }
-    </caption>
-
-    <tr>
-        <th>Content</th>
-        {#each content as cell}
-            <th>
-                {
-                    cell[language] ?
-                    cell[language] : 
-                        cell.en ?
-                        cell.en : 
-                        cell.name
-                }
-            </th>
-        {/each}
-    </tr>
-
-    {#each col1.items as row}
-    <tr>
-        <td class="{row.parent ? 'sub' : null}">
-            {
-                row.name[language] ? 
-                row.name[language] :
-                    row.name.en ? 
-                    row.name.en : 
-                    row.name
-            }
-        </td>
-
-        {#each content as cell}
-        <td>
-            {
-                !cell[row.name] ? 
-                '' :
-                    cell[row.name][language] ?
-                    cell[row.name][language] :
-                        cell[row.name]["en"] ? 
-                        cell[row.name]["en"] :
-                        cell[row.name]
-            }
-        </td>
-        {/each}
-    </tr>
-    {/each}
-</table>
-
-<style>
-    caption {
-        font-size: 1.3rem;
-        margin-bottom: 2rem;
-    }
-
-    table {
-        border-collapse: collapse;
-    }
-
-    th {
-        border-bottom: 1px solid #0000002f;
-        padding: 8px 16px;
-    }
-
-    td {
-        padding: 8px 16px;
-        border-bottom: 1px solid #00000012;
-    }
-
-    tr>td:first-child {
-        font-weight: 500;
-        text-align: left;
-    }
-
-    tr>td:not(:first-child) {
-        text-align: center;
-    }
-
-    .sub {
-        /* font-weight: 400 !important; */
-        font-size: 0.9rem;
-        padding-left: 2em;
-        color: #000000ad;
-    }
-</style>
+{#if !(typeof col === 'undefined')}
+    <Sheet language={language} col={col} content={content}></Sheet>
+{/if}
