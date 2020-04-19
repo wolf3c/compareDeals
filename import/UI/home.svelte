@@ -95,7 +95,7 @@
     .sub {
         /* font-weight: 400 !important; */
         font-size: 0.9rem;
-        padding-left: 1.5rem;
+        padding-left: 2em;
         color: #000000ad;
     }
 </style>
