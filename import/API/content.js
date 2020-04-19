@@ -1,4 +1,5 @@
-export let FirstColumn, ColumnContent
+export let FirstColumn, ColumnContent;
+
 FirstColumn = {
     name: 'samrtPhone',
     en: "smartphone",
