@@ -1,49 +1,101 @@
 <script>
     import { FirstColumn, ColumnContent} from '../API/content.js'
 
-    let title = FirstColumn.name
-    let c = FirstColumn.column
-    let col = ColumnContent
+    let language = 'zh';
+    let col1 = FirstColumn;
+    let content = ColumnContent;
 </script>
 
-<table cellpadding='10'>
+<table>
     <colgroup span='1' align="center" valign="middle" class="col-1"></colgroup>
 
-    <caption>{title.en}</caption>
+    <caption>
+        {
+            col1[language] ?
+            col1[language] :
+                col1.en ?
+                col1.en :
+                col1.name
+        }
+    </caption>
+
     <tr>
         <th>Content</th>
-        <th>{col.name}</th>
+        {#each content as cell}
+            <th>
+                {
+                    cell[language] ?
+                    cell[language] : 
+                        cell.en ?
+                        cell.en : 
+                        cell.name
+                }
+            </th>
+        {/each}
     </tr>
-    {#each c as c}
-        {#if c.column}
-            {#each c.column as sc}
-            <tr>
-                <td>{sc.name}</td>
-                <td>{col[c.name][sc.name]}</td>
-            </tr>
-            {/each}
-        {:else}
-            <tr>
-                <td>{c.name}</td>
-                <td>
-                    {#if col[c.name]["en"]}
-                        {col[c.name]["en"]}
-                    {:else}
-                        {col[c.name]}
-                    {/if}
-                </td>
-            </tr>
-        {/if}
+
+    {#each col1.items as row}
+    <tr>
+        <td class="{row.parent ? 'sub' : null}">
+            {
+                row.name[language] ? 
+                row.name[language] :
+                    row.name.en ? 
+                    row.name.en : 
+                    row.name
+            }
+        </td>
+
+        {#each content as cell}
+        <td>
+            {
+                !cell[row.name] ? 
+                '' :
+                    cell[row.name][language] ?
+                    cell[row.name][language] :
+                        cell[row.name]["en"] ? 
+                        cell[row.name]["en"] :
+                        cell[row.name]
+            }
+        </td>
+        {/each}
+    </tr>
     {/each}
 </table>
 
 <style>
     caption {
         font-size: 1.3rem;
-
+        margin-bottom: 2rem;
     }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    th {
+        border-bottom: 1px solid #0000002f;
+        padding: 8px 16px;
+    }
+
+    td {
+        padding: 8px 16px;
+        border-bottom: 1px solid #00000012;
+    }
+
     tr>td:first-child {
-        font-weight: 900;
-        text-align: right;
+        font-weight: 500;
+        text-align: left;
+    }
+
+    tr>td:not(:first-child) {
+        text-align: center;
+    }
+
+    .sub {
+        /* font-weight: 400 !important; */
+        font-size: 0.9rem;
+        padding-left: 1.5rem;
+        color: #000000ad;
     }
 </style>
