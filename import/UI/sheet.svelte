@@ -1,7 +1,7 @@
 <script>
-    export let language = 'zh'
-    export let col
-    export let content
+    export let language = 'zh';
+    export let col = {};
+    export let content = [];
 </script>
 
 <table>

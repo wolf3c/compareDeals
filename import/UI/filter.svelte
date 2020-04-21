@@ -1,0 +1,68 @@
+<script>
+    import { onMount, onDestroy } from "svelte";
+    import withTracker from '/import/components/withTracker.js'
+    import { Fields } from '/import/API/Fields.js';
+    import { Details } from "/import/API/Details.js";
+    import { createEventDispatcher } from "svelte";
+
+    export let language = 'en';
+
+    let categories = [];
+    let detailsNames = [];
+    let selectedCategory;
+
+    const categoriesComputation = withTracker(() => {
+        Meteor.subscribe('categories');
+        categories = Fields.find().fetch();
+        if (categories.length > 0) {
+            selectedCategory = categories[0].name
+        }
+        // if (categories.length > 0) {
+        //     Meteor.subscribe('detailsNames', category);
+        //     detailsNames = Details.find().fetch();
+        // }
+    })
+
+    const detailsNamesComputation = withTracker(() => {
+        Meteor.subscribe('detailsNames', selectedCategory);
+        detailsNames = Details.find().fetch();
+    })
+
+    const dispatch = createEventDispatcher();
+
+    function changeCategory(event) {
+        categoriesComputation.invalidate([event.target.value])
+        dispatch('filterMessage', {
+            category: event.target.value
+        })
+    }
+</script>
+
+<select name="categories" id="categories" on:change|preventDefault={changeCategory} >
+    {#each categories as category}
+        <option value="{category.name}">
+        {
+            category[language] ? 
+            category[language] : 
+                category.en ? 
+                category.en :
+                category.name
+        }
+        </option>
+    {/each}
+</select>
+
+<select name="detailsNames">
+    {#each detailsNames as item}
+        <option value="{item.name}">
+        {
+            language in item ?
+            item[language] :
+                "en" in item ?
+                item.en :
+                item.name
+        }
+        </option>
+    {/each}
+
+</select>
