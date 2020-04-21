@@ -1,7 +1,7 @@
 export let FirstColumn, ColumnContent;
 
 FirstColumn = {
-    name: 'samrtPhone',
+    name: 'smartPhone',
     en: "smartphone",
     zh: "手机比较",
     items: [
@@ -30,6 +30,7 @@ FirstColumn = {
 
 ColumnContent = [
     {
+        category: "smartPhone",
         name: "xiaomi",
         en: "XiaoMi",
         zh: "小米",
@@ -41,6 +42,7 @@ ColumnContent = [
         mainHz: "1.4GHz",
         AnTuTuscot: 1234
     }, {
+        category: "smartPhone2",
         name: "vivo",
         en: "vivo3",
         zh: "vivo 三",
