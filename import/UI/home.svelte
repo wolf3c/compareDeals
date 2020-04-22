@@ -31,8 +31,53 @@
     }
 </script>
 
-<Filter on:filterMessage={handleMessage}/>
+<div class="head">
+    <div class="head-content">
+        <h1>货比三家，找到最佳</h1>
+        <div class="filter">
+            <Filter on:filterMessage={handleMessage}/>
+        </div>
+    </div>
+    
+</div>
 
-{#if !(typeof col === 'undefined')}
-    <Sheet language={language} col={col} content={detail} />
-{/if}
+<div class="sheet">
+    {#if !(typeof col === 'undefined')}
+        <Sheet language={language} col={col} content={detail} />
+    {/if}
+</div>
+
+<style>
+    .head {
+        background: #6666ff;
+        height: 33vh;
+        width: 100%;
+    }
+
+    .head-content {
+        position: relative;
+        top: 25%;
+    }
+
+    h1 {
+        margin: 0;
+        text-align: center;
+        font-size: 3rem;
+        color: white;
+    }
+
+    .filter {
+        position: relative;
+        top: 1.5rem;
+        display: flex;
+        display: -webkit-flex; /* Safari */
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sheet {
+        padding: 1rem 0 0 1rem;
+    }
+</style>

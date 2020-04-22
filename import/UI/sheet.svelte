@@ -7,7 +7,7 @@
 <table>
     <colgroup span='1' align="center" valign="middle" class="col-1"></colgroup>
 
-    <caption>
+    <!-- <caption>
         {
             language in col ?
             col[language] :
@@ -15,7 +15,7 @@
                 col.en :
                 col.name
         }
-    </caption>
+    </caption> -->
 
     <tr>
         <th>Content</th>
@@ -64,10 +64,10 @@
 </table>
 
 <style>
-    caption {
+    /* caption {
         font-size: 1.3rem;
         margin-bottom: 2rem;
-    }
+    } */
 
     table {
         border-collapse: collapse;

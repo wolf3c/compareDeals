@@ -52,7 +52,7 @@
     {/each}
 </select>
 
-<select name="detailsNames">
+<!-- <select name="detailsNames">
     {#each detailsNames as item}
         <option value="{item.name}">
         {
@@ -64,5 +64,4 @@
         }
         </option>
     {/each}
-
-</select>
+</select> -->
