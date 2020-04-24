@@ -1,2 +1,4 @@
 node_modules/
 .meteor/ 
+settings.json
+.deploy/mup.js
