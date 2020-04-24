@@ -40,28 +40,14 @@
 
 <select name="categories" id="categories" on:change|preventDefault={changeCategory} >
     {#each categories as category}
-        <option value="{category.name}">
+        <option value="{category.category}">
         {
             category[language] ? 
             category[language] : 
                 category.en ? 
                 category.en :
-                category.name
+                category.category
         }
         </option>
     {/each}
 </select>
-
-<!-- <select name="detailsNames">
-    {#each detailsNames as item}
-        <option value="{item.name}">
-        {
-            language in item ?
-            item[language] :
-                "en" in item ?
-                item.en :
-                item.name
-        }
-        </option>
-    {/each}
-</select> -->

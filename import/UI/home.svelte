@@ -9,13 +9,13 @@
     import Sheet from './sheet.svelte'
     import Filter from "./filter.svelte";
 
-    let col = [];
+    let category = [];
     let detail = []; 
     let selectedCategory;
 
     const computation = withTracker(() => { 
         Meteor.subscribe('fields');
-        col = Fields.findOne();
+        category = Fields.findOne();
     });
 
     const detailComputation = withTracker(() => {
@@ -27,6 +27,7 @@
 
     function handleMessage(event) {
         selectedCategory = event.detail.category;
+        console.log(selectedCategory)
         detailComputation.invalidate([selectedCategory])
     }
 </script>
@@ -42,8 +43,8 @@
 </div>
 
 <div class="sheet">
-    {#if !(typeof col === 'undefined')}
-        <Sheet language={language} col={col} content={detail} />
+    {#if !(typeof category === 'undefined')}
+        <Sheet language={language} category={category} content={detail} />
     {/if}
 </div>
 

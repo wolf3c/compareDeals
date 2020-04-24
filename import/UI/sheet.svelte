@@ -1,6 +1,6 @@
 <script>
     export let language = 'zh';
-    export let col = {};
+    export let category = {};
     export let content = [];
 </script>
 
@@ -32,7 +32,7 @@
         {/each}
     </tr>
 
-    {#each col.items as row}
+    {#each category.items as row}
     <tr>
         <td class="{row.parent ? 'sub' : null}">
             {
