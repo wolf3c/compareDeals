@@ -13,9 +13,9 @@
     let detail = []; 
     let selectedCategory;
 
-    const computation = withTracker(() => { 
-        Meteor.subscribe('fields');
-        category = Fields.findOne();
+    const categoryComputation = withTracker(() => { 
+        Meteor.subscribe('fields', selectedCategory);
+        category = Fields.findOne({category: selectedCategory});
     });
 
     const detailComputation = withTracker(() => {
@@ -28,6 +28,7 @@
     function handleMessage(event) {
         selectedCategory = event.detail.category;
         detailComputation.invalidate([selectedCategory])
+        categoryComputation.invalidate([selectedCategory])
     }
 </script>
 
