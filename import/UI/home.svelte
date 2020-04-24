@@ -27,7 +27,6 @@
 
     function handleMessage(event) {
         selectedCategory = event.detail.category;
-        console.log(selectedCategory)
         detailComputation.invalidate([selectedCategory])
     }
 </script>

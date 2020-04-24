@@ -17,10 +17,6 @@
         if (categories.length > 0) {
             selectedCategory = categories[0].name
         }
-        // if (categories.length > 0) {
-        //     Meteor.subscribe('detailsNames', category);
-        //     detailsNames = Details.find().fetch();
-        // }
     })
 
     const detailsNamesComputation = withTracker(() => {
