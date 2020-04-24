@@ -36,7 +36,7 @@
     <div class="head-content">
         <h1>货比三家，找到最佳</h1>
         <div class="filter">
-            <Filter on:filterMessage={handleMessage}/>
+            <Filter language={language} on:filterMessage={handleMessage}/>
         </div>
     </div>
     
