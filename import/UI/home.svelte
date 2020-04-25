@@ -9,44 +9,44 @@
     import Sheet from './sheet.svelte'
     import Filter from "./filter.svelte";
 
-    let category = [];
+    let categories = [];
     let detail = []; 
     let selectedCategory;
+    let language = 'zh';
 
     const categoryComputation = withTracker(() => { 
-        Meteor.subscribe('fields', selectedCategory);
-        category = Fields.findOne({category: selectedCategory});
+        Meteor.subscribe('fields');
+        Meteor.subscribe('details');
+        categories = Fields.find().fetch();
     });
-
-    const detailComputation = withTracker(() => {
-        Meteor.subscribe('details', selectedCategory);
-        detail = Details.find().fetch()
-    })
-
-    let language = 'zh';
 
     function handleMessage(event) {
         selectedCategory = event.detail.category;
-        detailComputation.invalidate([selectedCategory])
-        categoryComputation.invalidate([selectedCategory])
+        detail = Details.find({category: selectedCategory.category}).fetch()
     }
 </script>
+
+<!----------------------------------HTML------------------------------------->
 
 <div class="head">
     <div class="head-content">
         <h1>货比三家，找到最佳</h1>
         <div class="filter">
-            <Filter language={language} on:filterMessage={handleMessage}/>
+            {#if categories.length>0}
+                <Filter language={language} categories={categories} on:filterMessage={handleMessage}/>
+            {/if}
         </div>
     </div>
     
 </div>
 
 <div class="sheet">
-    {#if !(typeof category === 'undefined')}
-        <Sheet language={language} category={category} content={detail} />
+    {#if detail.length > 0}
+        <Sheet language={language} category={selectedCategory} content={detail} />
     {/if}
 </div>
+
+<!----------------------------------CSS------------------------------------->
 
 <style>
     .head {

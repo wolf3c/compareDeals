@@ -6,37 +6,21 @@
     import { createEventDispatcher } from "svelte";
 
     export let language = 'en';
+    export let categories = [];
 
-    let categories = [];
-    let detailsNames = [];
-    let selectedCategory;
-
-    const categoriesComputation = withTracker(() => {
-        Meteor.subscribe('categories');
-        categories = Fields.find().fetch();
-        if (categories.length > 0) {
-            selectedCategory = categories[0].name
-        }
-    })
-
-    const detailsNamesComputation = withTracker(() => {
-        Meteor.subscribe('detailsNames', selectedCategory);
-        detailsNames = Details.find().fetch();
-    })
+    let selected;
+    let select;
 
     const dispatch = createEventDispatcher();
 
-    function changeCategory(event) {
-        categoriesComputation.invalidate([event.target.value])
-        dispatch('filterMessage', {
-            category: event.target.value
-        })
-    }
+    $: dispatch('filterMessage', {
+        category: selected
+    })
 </script>
 
-<select name="categories" id="categories" on:change|preventDefault={changeCategory} >
+<select bind:value={selected}>
     {#each categories as category}
-        <option value="{category.category}">
+        <option value="{category}">
         {
             category[language] ? 
             category[language] : 
