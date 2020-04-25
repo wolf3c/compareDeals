@@ -7,16 +7,6 @@
 <table>
     <colgroup span='1' align="center" valign="middle" class="col-1"></colgroup>
 
-    <!-- <caption>
-        {
-            language in col ?
-            col[language] :
-                'en' in col ?
-                col.en :
-                col.name
-        }
-    </caption> -->
-
     <tr>
         <th>Content</th>
         {#each content as cell}
