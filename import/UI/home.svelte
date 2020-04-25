@@ -11,7 +11,7 @@
 
     let categories = [];
     let detail = []; 
-    let selectedCategory;
+    let selectedCategory = {};
     let language = 'zh';
 
     const categoryComputation = withTracker(() => { 
