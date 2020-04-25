@@ -10,7 +10,7 @@
     import Filter from "./filter.svelte";
 
     let categories = [];
-    let detail = []; 
+    let details = []; 
     let selectedCategory = {};
     let language = 'zh';
 
@@ -20,10 +20,16 @@
         categories = Fields.find().fetch();
     });
 
+    const detailsComputation = withTracker(() => {
+        details = Details.find({category: selectedCategory.category}).fetch()
+    })
+
     function handleMessage(event) {
         selectedCategory = event.detail.category;
-        detail = Details.find({category: selectedCategory.category}).fetch()
+        detailsComputation.invalidate([selectedCategory.category])
     }
+
+    
 </script>
 
 <!----------------------------------HTML------------------------------------->
@@ -41,8 +47,8 @@
 </div>
 
 <div class="sheet">
-    {#if detail.length > 0}
-        <Sheet language={language} category={selectedCategory} content={detail} />
+    {#if details.length > 0}
+        <Sheet language={language} category={selectedCategory} content={details} />
     {/if}
 </div>
 
