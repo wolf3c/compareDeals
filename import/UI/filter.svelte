@@ -18,6 +18,8 @@
     })
 </script>
 
+<!----------------------------------HTML------------------------------------->
+
 <select bind:value={selected}>
     {#each categories as category}
         <option value="{category}">

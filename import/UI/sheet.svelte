@@ -4,6 +4,8 @@
     export let content = [];
 </script>
 
+<!----------------------------------HTML------------------------------------->
+
 <table>
     <colgroup span='1' align="center" valign="middle" class="col-1"></colgroup>
 
@@ -52,6 +54,8 @@
     </tr>
     {/each}
 </table>
+
+<!----------------------------------CSS------------------------------------->
 
 <style>
     /* caption {
