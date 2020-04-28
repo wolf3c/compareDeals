@@ -43,13 +43,15 @@
         {#each content as cell}
         <td>
             {@html marked(
-                !cell[row.name] ? 
+                cell[row.name] === undefined  ?
                 '' :
-                    cell[row.name][language] ?
-                    cell[row.name][language] :
-                        cell[row.name]["en"] ? 
-                        cell[row.name]["en"] :
-                        cell[row.name]
+                    typeof cell[row.name] != 'object' ?
+                    cell[row.name].toString() : 
+                        language in cell[row.name] ?
+                        cell[row.name][language] :
+                            "en" in cell[row.name] ? 
+                            cell[row.name]["en"] :
+                            ''
             )}
         </td>
         {/each}
