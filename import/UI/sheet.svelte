@@ -62,11 +62,6 @@
 <!----------------------------------CSS------------------------------------->
 
 <style>
-    /* caption {
-        font-size: 1.3rem;
-        margin-bottom: 2rem;
-    } */
-
     table {
         border-collapse: collapse;
     }
@@ -74,6 +69,7 @@
     th {
         border-bottom: 1px solid #0000002f;
         padding: 8px 16px;
+        text-align: left;
     }
 
     td {
@@ -86,12 +82,7 @@
         text-align: left;
     }
 
-    tr>td:not(:first-child) {
-        text-align: center;
-    }
-
     .sub {
-        /* font-weight: 400 !important; */
         font-size: 0.9rem;
         padding-left: 2em;
         color: #000000ad;
