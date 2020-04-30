@@ -1,6 +1,4 @@
 <script>
-    import marked from 'marked';
-
     export let language = 'zh';
     export let category = {};
     export let content = [];
@@ -14,22 +12,22 @@
     <tr>
         <th>Content</th>
         {#each content as cell}
-            <th>
-                {@html marked(
+            <th class="markdown">
+                {@html
                     language in cell ?
                     cell[language] : 
                         'en' in cell ?
                         cell.en : 
                         cell.name
-                )}
+                }
             </th>
         {/each}
     </tr>
 
     {#each category.items as row}
     <tr>
-        <td class="{row.parent ? 'sub' : null}">
-            {@html marked(
+        <td class="{row.parent ? 'sub' : null} markdown">
+            {@html
                 language in row ? 
                 row[language] :
                     'en' in row ? 
@@ -37,12 +35,12 @@
                         'name' in row ?
                         row.name :
                         '-'
-            )}
+            }
         </td>
 
         {#each content as cell}
-        <td>
-            {@html marked(
+        <td class="markdown">
+            {@html
                 cell[row.name] === undefined  ?
                 '' :
                     typeof cell[row.name] != 'object' ?
@@ -52,7 +50,7 @@
                             "en" in cell[row.name] ? 
                             cell[row.name]["en"] :
                             ''
-            )}
+            }
         </td>
         {/each}
     </tr>
