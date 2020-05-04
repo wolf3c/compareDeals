@@ -73,6 +73,7 @@
     td {
         padding: 8px 16px;
         border-bottom: 1px solid #00000012;
+        max-width: 20em;
     }
 
     tr>td:first-child {
