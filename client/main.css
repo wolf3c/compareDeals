@@ -3,3 +3,23 @@ body {
     margin: 0;
     /* font-family: sans-serif; */
 }
+
+/* --------------- markdown  style --------------- */
+.markdown ul {
+    margin: 0;
+    padding-left: 16px;
+}
+
+.markdown p {
+    margin: 0;
+}
+
+.markdown blockquote {
+    margin: .2em 0 0 0;
+}
+
+.markdown blockquote p {
+    border-left: solid gainsboro 2px;
+    padding-left: 6px;
+    color: #00000082;
+}
